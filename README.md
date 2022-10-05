@@ -9,3 +9,8 @@ Go here : https://chromedriver.chromium.org/downloads choose your webdriver vers
 
 # Second Step
 Launch the `install.bat` file and after launch the `start.bat` file. You done now, you are ready to go !
+
+# Errors
+- If you have an error, try find from where come the error. If it is an error when the register instagram page opens then put a `#` in front of the line n°46.
+- If you have an error when it's ask your birthday then verify you put a month in your language in the `config.json` file.
+- If you can't open the file, make sure you have open the `install.bat`, and PYTHON obviously x) (you can dowload it at https://www.python.org/downloads/)
