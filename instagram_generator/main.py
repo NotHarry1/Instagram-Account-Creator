@@ -1,13 +1,19 @@
-import selenium, colorama, os, sys, time, random, string, re
+import selenium, colorama, os, sys, time, random, string, re, json
 import pyperclip as pc
 from pynput import keyboard
 from colorama import Fore
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 
 letters = ["a", "b","c", "d","e", "f","g", "h","i", "j","k", "l","m", "n", "o", "p","q", "r","s", "t","u", "v","w", "x","y", "z"]
 characters = ["1", "2", "3", "4", "5", "6", "0", "@", "!", "'", "(", ")", "[", "]", "a", "b", "c", "d", "e", "f", "g", "i", "j", "A", "B", "C", "D", "E", "F", "G", "I", "J"]
+
+config = json.load(open('config.json', 'r'))
+day = config['day']
+month = config['month']
+year = config['year']
 
 def random_char(char_num):
        return ''.join(random.choice(string.ascii_letters) for _ in range(char_num))
@@ -45,9 +51,9 @@ while(True):
        driver.find_element(By.NAME, "password").send_keys(password)
        driver.find_element(By.XPATH, "//button[@type=\"submit\"]").click()
        time.sleep(1)
-       driver.find_element(By.XPATH, "//option[@title='février']").click()
-       driver.find_element(By.XPATH, "//option[@title='3']").click()
-       driver.find_element(By.XPATH, "//option[@title='1999']").click()
+       driver.find_element(By.XPATH, f"//option[@title='{month}']").click()
+       driver.find_element(By.XPATH, f"//option[@title='{day}']").click()
+       driver.find_element(By.XPATH, f"//option[@title='{year}']").click()
        driver.find_element(By.CSS_SELECTOR, ".sqdOP.L3NKy._4pI4F.y3zKF ").click()
        time.sleep(2)
        print(f"{Fore.GREEN}[+] Getting the verification code...")
@@ -68,6 +74,6 @@ while(True):
        text = f"{pasttext}:{usernames}:{password}"
        with open('account.txt', 'a') as thefile:
               thefile.write(f"{text} \n")
-       time.sleep(30)
+       time.sleep(30) #Time To wait until the account get confirmed by instagram
        sdriver.close()
        driver.close()
